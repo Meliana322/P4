@@ -43,35 +43,42 @@ const loc3 = document.getElementById("location3");
 const loc4 = document.getElementById("location4");
 const loc5 = document.getElementById("location5");
 const loc6 = document.getElementById("location6");
-const btnSubmit = document.getElementById("btn_envoi");
+const participation = document.getElementById("quantity");
+const valideConditions = document.getElementById("checkbox1");
+
+// const dateActuelle = new Date();
+// const dateActuelleLocale = dateActuelle.toLocaleDateString("fr-FR", {
+//   day: "numeric",
+//   month: "numeric",
+//   year: "numeric",
+// });
+// const dateNaissance = dateActuelleLocale[2] > 18;
+
 // Confirmation de la soumission réussie
-document.getElementById("formulaire").addEventListener("submit", function (e) {
+document.getElementById("formulaire").addEventListener("input", function (e) {
   e.preventDefault();
 
-  // Champ email
-
-  // Champ prénom
   let error;
 
-  if (!quantity.value.match(/^([0-9]){1,2}$/)) {
-    error = "Veuillez saisir un nombre";
-    formData[2].setAttribute("data-error", error);
-    formData[2].setAttribute("data-error-visible", true);
-  }
-  if (!eMail.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
-    error = "Merci de saisir une adresse mail valide";
-    formData[2].setAttribute("data-error", error);
-    formData[2].setAttribute("data-error-visible", true);
+  if (firstName.value.length < 2) {
+    error = "Merci de renseigner le champ";
+    formData[0].setAttribute("data-error", error);
+    formData[0].setAttribute("data-error-visible", true);
   }
   if (lastName.value.length < 2) {
     error = "Merci de renseigner le champ";
     formData[1].setAttribute("data-error", error);
     formData[1].setAttribute("data-error-visible", true);
   }
-  if (firstName.value.length < 2) {
+  if (!eMail.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+    error = "Merci de saisir une adresse mail valide";
+    formData[2].setAttribute("data-error", error);
+    formData[2].setAttribute("data-error-visible", true);
+  }
+  if (birthDate.value < 8 || dateNaissance.value) {
     error = "Merci de renseigner le champ";
-    formData[0].setAttribute("data-error", error);
-    formData[0].setAttribute("data-error-visible", true);
+    formData[3].setAttribute("data-error", error); // creation de l'objet avec attribut data-error
+    formData[3].setAttribute("data-error-visible", true);
   } else {
     formData[0].setAttribute("data-error-visible", false);
   }
@@ -81,20 +88,5 @@ document.getElementById("formulaire").addEventListener("submit", function (e) {
     return false;
   } else {
     alert("Merci ! Votre réservation a été reçue.");
-  }
-});
-btnSubmit.addEventListener("click", function (event) {
-  if (
-    validText(form.first.value, regex.name) &&
-    validText(form.last.value, regex.name) &&
-    validText(form.email.value, regex.mail) &&
-    validText(form.quantity.value, regex.quantity) &&
-    isDateValid() &&
-    isCityValid() &&
-    isTermsValid()
-  ) {
-    console.log("ok");
-  } else {
-    event.preventDefault();
   }
 });
