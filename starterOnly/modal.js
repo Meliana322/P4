@@ -20,7 +20,9 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-// #1 close modal
+// ┌──────────────────────────────────────────────────────────────────────────────┐
+// │ CLOSE MODAL                                                                  │
+// └──────────────────────────────────────────────────────────────────────────────┘
 function closeModal() {
   modalbg.style.display = "none";
 }
@@ -29,32 +31,28 @@ const closeBtn = document.querySelector("span.close");
 
 closeBtn.addEventListener("click", closeModal);
 
-// #2 Implémenter entrées formulaire
-
-// Récupération valeurs imput
+// ┌──────────────────────────────────────────────────────────────────────────────┐
+// │ CIBLAGE DES INPUTS                                                           │
+// └──────────────────────────────────────────────────────────────────────────────┘
 const firstName = document.getElementById("first");
 const lastName = document.getElementById("last");
 const eMail = document.getElementById("email");
 const birthDate = document.getElementById("birthdate");
 const quantityTournament = document.getElementById("quantity");
-const loc1 = document.getElementById("location1");
-const loc2 = document.getElementById("location2");
-const loc3 = document.getElementById("location3");
-const loc4 = document.getElementById("location4");
-const loc5 = document.getElementById("location5");
-const loc6 = document.getElementById("location6");
+const locations = document.querySelectorAll("input[type=radio]");
+// const loc1 = document.getElementById("location1");
+// const loc2 = document.getElementById("location2");
+// const loc3 = document.getElementById("location3");
+// const loc4 = document.getElementById("location4");
+// const loc5 = document.getElementById("location5");
+// const loc6 = document.getElementById("location6");
 const participation = document.getElementById("quantity");
 const valideConditions = document.getElementById("checkbox1");
+const confirmSend = document.getElementById("confirmSendMessage");
 
-//  const dateActuelle = new Date();
-//  const dateActuelleLocale = dateActuelle.toLocaleDateString("fr-FR", {
-//    day: "numeric",
-//    month: "numeric",
-//    year: "numeric",
-//  });
-//  const dateNaissance = dateActuelleLocale[2] > 18;
-
-// Confirmation de la soumission réussie
+// ┌──────────────────────────────────────────────────────────────────────────────┐
+// │ CHAMPS FORMULAIRE ERREURS / VALIDATIONS                                      │
+// └──────────────────────────────────────────────────────────────────────────────┘
 document.getElementById("formulaire").addEventListener("submit", function (e) {
   e.preventDefault();
   let error = "";
@@ -62,7 +60,7 @@ document.getElementById("formulaire").addEventListener("submit", function (e) {
   if (firstName.value.length < 2) {
     error = "Merci de renseigner le champ";
     formData[0].setAttribute("data-error", error);
-    formData[0].setAttribute("data-error-visible", true);
+    formData[0].setAttribute("data-error-visible", true); // si data-error = true affiche moi le msg
   } else {
     formData[0].setAttribute("data-error-visible", false);
   }
@@ -86,7 +84,7 @@ document.getElementById("formulaire").addEventListener("submit", function (e) {
   const today = new Date();
   const selectedDate = new Date(birthDate.value);
 
-  console.log(birthDate.value);
+  // console.log(birthDate.value);
   if (birthDate.value === "" || today < selectedDate) {
     error = "Merci de renseigner le champ";
     formData[3].setAttribute("data-error", error);
@@ -96,13 +94,7 @@ document.getElementById("formulaire").addEventListener("submit", function (e) {
   }
   //console.log(typeof quantityTournament.value);
   if (quantityTournament.value === "" || Number(quantityTournament.value) < 0) {
-    error = "Merci de renseigner le champ";
-    formData[4].setAttribute("data-error", error);
-    formData[4].setAttribute("data-error-visible", true);
-  } else {
-    formData[4].setAttribute("data-error-visible", false);
-  }
-  if (quantityTournament.value === "" || Number(quantityTournament.value) < 0) {
+    // Number() -> quantityTournament = number et non string
     error = "Merci de renseigner le champ";
     formData[4].setAttribute("data-error", error);
     formData[4].setAttribute("data-error-visible", true);
@@ -110,7 +102,32 @@ document.getElementById("formulaire").addEventListener("submit", function (e) {
     formData[4].setAttribute("data-error-visible", false);
   }
 
+  let radioCheck = false;
+
+  for (let radio of locations) {
+    // if (item.checked === true) {
+    //   error = "Merci de renseigner le champ";
+    //   formData[5].setAttribute("data-error", error);
+    //   formData[5].setAttribute("data-error-visible", true);
+    // } else {
+    //   formData[5].setAttribute("data-error-visible", false);
+    // }
+    if (radio.checked === true) {
+      radioCheck = true;
+      error = "Merci de renseigner le champ";
+      formData[5].setAttribute("data-error", error);
+      formData[5].setAttribute("data-error-visible", true);
+    } else {
+      formData[5].setAttribute("data-error-visible", false);
+    }
+  }
+  console.log(radioCheck);
+
   if (error === "") {
     alert("Merci ! Votre réservation a été reçue.");
   }
 });
+
+// ┌──────────────────────────────────────────────────────────────────────────────┐
+// │ THANKS AND DISAPPEARANCE MODAL                                                       │
+// └──────────────────────────────────────────────────────────────────────────────┘
