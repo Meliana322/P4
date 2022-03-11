@@ -40,12 +40,6 @@ const eMail = document.getElementById("email");
 const birthDate = document.getElementById("birthdate");
 const quantityTournament = document.getElementById("quantity");
 const locations = document.querySelectorAll("input[type=radio]");
-// const loc1 = document.getElementById("location1");
-// const loc2 = document.getElementById("location2");
-// const loc3 = document.getElementById("location3");
-// const loc4 = document.getElementById("location4");
-// const loc5 = document.getElementById("location5");
-// const loc6 = document.getElementById("location6");
 const participation = document.getElementById("quantity");
 const valideConditions = document.getElementById("checkbox1");
 const confirmSend = document.getElementById("confirmSendMessage");
@@ -102,26 +96,26 @@ document.getElementById("formulaire").addEventListener("submit", function (e) {
     formData[4].setAttribute("data-error-visible", false);
   }
 
-  let radioCheck = false;
+  // let radioCheck = false;
 
-  for (let radio of locations) {
-    // if (item.checked === true) {
-    //   error = "Merci de renseigner le champ";
-    //   formData[5].setAttribute("data-error", error);
-    //   formData[5].setAttribute("data-error-visible", true);
-    // } else {
-    //   formData[5].setAttribute("data-error-visible", false);
-    // }
-    if (radio.checked === true) {
-      radioCheck = true;
-      error = "Merci de renseigner le champ";
-      formData[5].setAttribute("data-error", error);
-      formData[5].setAttribute("data-error-visible", true);
-    } else {
-      formData[5].setAttribute("data-error-visible", false);
-    }
+  // for (let radio of locations) {
+  //   if (radio.checked === true) {
+  //     radioCheck = true;
+  //   }
+  // }
+  // console.log(radioCheck);
+
+  let conditions = false;
+
+  if (valideConditions.checked === true) {
+    conditions = true;
+    formData[6].setAttribute("data-error", error);
+    formData[6].setAttribute("data-error-visible", true);
+  } else {
+    formData[6].setAttribute("data-error-visible", false);
   }
-  console.log(radioCheck);
+
+  console.log(conditions);
 
   if (error === "") {
     alert("Merci ! Votre réservation a été reçue.");
