@@ -534,3 +534,8 @@ footer {
     opacity: 1;
   }
 }
+/* Validation réussie */
+.modal-body_validate {
+  height: 80%;
+  width: 100%;
+}
