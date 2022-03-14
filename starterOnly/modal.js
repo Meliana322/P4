@@ -101,21 +101,22 @@ document.getElementById("formulaire").addEventListener("submit", function (e) {
   //   formData[4].setAttribute("data-error-visible", false);
   // }
 
-  // let conditions = false;
+  let conditions = false;
 
-  // if (valideConditions.checked === true) {
-  //   conditions = true;
-  //   formData[6].setAttribute("data-error", error);
-  //   formData[6].setAttribute("data-error-visible", true);
-  // } else {
-  //   formData[6].setAttribute("data-error-visible", false);
-  // }
+  if (valideConditions.checked === "") {
+    conditions = true;
+    formData[6].setAttribute("data-error", error);
+    formData[6].setAttribute("data-error-visible", true);
+  } else {
+    formData[6].setAttribute("data-error-visible", false);
+  }
 
   const validForm = new Boolean();
   const btnSubmitValid = new Boolean(btnSubmit.value);
   btnSubmitValid.value = true;
 
   if (btnSubmitValid.value === true) {
+    //Affichage message de confirmation envoi
     modal.style.display = "none";
     confirmSend.style.display = "block";
   }
