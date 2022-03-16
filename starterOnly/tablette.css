@@ -1,0 +1,18 @@
+@media screen and (max-width: 992px) {
+  .topnav a {
+    font-size: 17px;
+  }
+
+  .hero-content {
+    object-fit: cover;
+  }
+  .hero-headline {
+    font-size: 40px;
+  }
+  .hero-text {
+    font-size: 20px;
+  }
+  .btn2 {
+    display: none;
+  }
+}
